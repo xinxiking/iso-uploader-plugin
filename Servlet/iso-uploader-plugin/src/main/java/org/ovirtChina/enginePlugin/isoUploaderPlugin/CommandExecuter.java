@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Writer;
@@ -19,12 +18,28 @@ public class CommandExecuter {
   /**
   * Execute and return a Response for the command list
   */
-  public void list(){
+  public void list(String IsoUploadName,String useIsoName){
+
       System.out.println("Execute function ovirt-iso-uploader list");
 
-      executeCommand("ovirt-iso-uploader list");
+      String isonameinfo = executeCommand("ovirt-iso-uploader list");
 
       System.out.println("End of the execution of the function ovirt-iso-uploader list");
+
+      //String isoname = isonameinfo.substring(0, isonameinfo.indexOf(" "));
+
+      String isoname = useIsoName;
+
+      System.out.println("参数 :" + isoname);
+
+      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName;
+
+      System.out.println("参数 :" + ovirtuploadername);
+
+      executeCommandisoupload(ovirtuploadername);
+
+      System.out.println(IsoUploadName + " is completed.");
+
   }
 
   /**
@@ -51,6 +66,10 @@ public class CommandExecuter {
 			Process p = builder.start();
 
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+
+			writer.write( "hw135410\n" );
+			//writer.flush();
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 		  String line = "";
@@ -58,42 +77,22 @@ public class CommandExecuter {
 			line = reader.readLine();
 			System.out.println(line);
 
-			writer.write( "abc123\n" );
-			writer.flush();
+			//writer.write( "hw135410\n" );
+			//writer.flush();
 
 			while ((line = reader.readLine())!= null) {
 				outputBuf.append(line + "\n");
 
 				//System.out.println(line);
 				System.out.println("New Output is: " + line);
-
 				if (line.contains(lineAskingPassword)){
 					System.out.println("CLI requests password");
 
-					writer.write( "abc123\n" );
-					writer.flush();
+					//writer.write( "hw135410\n" );
+					//writer.flush();
 				}
 
 			}
-
-
-
-		// Process p;
-		// try {
-		// 	p = Runtime.getRuntime().exec(command);
-		//
-    //   Writer wr = new OutputStreamWriter(p.getOutputStream());
-		//
-		// 	//p.waitFor();
-		// 	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		//
-    //   wr.write( "abc123\n" );
-    //   wr.flush();
-		//
-    //   String line = "";
-		// 	while ((line = reader.readLine())!= null) {
-		// 		output.append(line + "\n");
-		// 	}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,6 +100,27 @@ public class CommandExecuter {
 
     System.out.println("Output: " + outputBuf.toString().trim());
 		return outputBuf.toString().trim();
+	}
+
+	private void executeCommandisoupload(String command1) {
+
+	    System.out.println("Executing command: " + command1);
+
+			String[] commands1 = new String[]{"/bin/sh","-c",command1};
+			try {
+			ProcessBuilder builder1 = new ProcessBuilder(commands1);
+			builder1.redirectErrorStream(true);
+			Process p1 =builder1.start();
+			//BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(p1.getOutputStream()));
+			BufferedReader reader1 = new BufferedReader(new InputStreamReader(p1.getInputStream()));
+			String line1 = "";
+			line1 = reader1.readLine();
+			System.out.println(line1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			System.out.println("End of the execution of the function ovirt-iso-uploader upload");
 	}
 
 }
