@@ -26,15 +26,13 @@ public class CommandExecuter {
 
       System.out.println("End of the execution of the function ovirt-iso-uploader list");
 
-      //String isoname = isonameinfo.substring(0, isonameinfo.indexOf(" "));
-
       String isoname = useIsoName;
 
-      System.out.println("参数 :" + isoname);
+      System.out.println("Execute function ovirt-iso-uploader upload");
 
       String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName;
 
-      System.out.println("参数 :" + ovirtuploadername);
+      System.out.println(ovirtuploadername);
 
       executeCommandisoupload(ovirtuploadername);
 
@@ -67,8 +65,7 @@ public class CommandExecuter {
 
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
-			writer.write( "hw135410\n" );
-			//writer.flush();
+			writer.write( "abc123\n" );
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -77,19 +74,12 @@ public class CommandExecuter {
 			line = reader.readLine();
 			System.out.println(line);
 
-			//writer.write( "hw135410\n" );
-			//writer.flush();
-
 			while ((line = reader.readLine())!= null) {
 				outputBuf.append(line + "\n");
 
-				//System.out.println(line);
 				System.out.println("New Output is: " + line);
 				if (line.contains(lineAskingPassword)){
 					System.out.println("CLI requests password");
-
-					//writer.write( "hw135410\n" );
-					//writer.flush();
 				}
 
 			}

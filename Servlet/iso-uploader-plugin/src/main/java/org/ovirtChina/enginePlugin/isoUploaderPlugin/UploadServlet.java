@@ -111,7 +111,6 @@ public class UploadServlet extends HttpServlet {
 
         //Here we add a ".temp" to every upload file to indicate NON-FINISHED
         String flowFilePath = flowFile.getAbsolutePath() + ".temp";
-        System.out.println("_____________path: " + flowFilePath);
 
         FlowInfoStorage storage = FlowInfoStorage.getInstance();
 

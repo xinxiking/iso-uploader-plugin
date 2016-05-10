@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class GetIsoDomain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static String optionIsoName;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +36,7 @@ public class GetIsoDomain extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		optionIsoName = request.getParameter("selectname");
-		System.out.println("why :" + optionIsoName);
+		//System.out.println(optionIsoName);
 	}
 
 }
