@@ -37,7 +37,7 @@ function showIsoName() {
         alert(str);
         $.ajax({
             type:"post",
-            url:"//192.168.9.28/iso-uploader-plugin/GetIsoDomain",
+            url:"/iso-uploader-plugin/GetIsoDomain",
              dataType: "json",
             //headers: {"Content-Type":"application/json"},
             data:{'selectname':str},
