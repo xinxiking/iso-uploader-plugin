@@ -8,7 +8,12 @@
 </head>
 <body>
 
-  <div flow-init="{target: '//192.168.3.154:8080/isoUploaderPlugin/upload',
+<select name="selectname" id="selectid" onFocus="showIsoName()">
+<option>下拉选择存储域</option>
+</select>
+<button onclick="servletGetIsoName()">确定</button>
+
+  <div flow-init="{target: '/iso-uploader-plugin/upload',
            method: 'octet' }"
  flow-files-submitted="$flow.upload()"
  flow-file-success="$file.msg = $message">
@@ -158,6 +163,7 @@
   <script src="lib/angular/js/angular.js"></script>
   <script src="js/common.js"></script>
   <script src="js/tab.js"></script>
+  <script src="js/getisoname.js"></script>
   <script src="js/filters.js"></script>
   <script src="lib/ng-flow-standalone.js"></script>
 

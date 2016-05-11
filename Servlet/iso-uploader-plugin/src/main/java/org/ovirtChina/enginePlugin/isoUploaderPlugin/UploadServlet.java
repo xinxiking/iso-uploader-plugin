@@ -18,9 +18,11 @@ public class UploadServlet extends HttpServlet {
 
     public static final String UPLOAD_DIR = "uploads";
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int flowChunkNumber = getFlowChunkNumber(request);
+    public static String getOptionIsoName;
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        int flowChunkNumber = getFlowChunkNumber(request);
 
         FlowInfo info = getFlowInfo(request);
 
@@ -55,9 +57,10 @@ public class UploadServlet extends HttpServlet {
             FlowInfoStorage.getInstance().remove(info);
             response.getWriter().print("All finished.");
 
-            list();
+            getOptionIsoName = GetIso();
+            list(info.flowFilename,getOptionIsoName);
 
-            System.out.println(info.flowFilename + " is completed.");
+            //System.out.println(info.flowFilename + " is completed.");
 
         } else {
             response.getWriter().print("Upload");
@@ -120,8 +123,13 @@ public class UploadServlet extends HttpServlet {
         return info;
     }
 
-  private void list(){
+  private void list(String IsoUploadName,String getOptionIsoName){
     CommandExecuter cmdExe = new CommandExecuter();
-    cmdExe.list();
+    cmdExe.list(IsoUploadName,getOptionIsoName);
   }
+
+  private String GetIso(){
+	    GetIsoDomain getisodomain = new GetIsoDomain();
+	    return getisodomain.optionIsoName;
+   }
 }
