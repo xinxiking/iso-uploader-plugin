@@ -27,7 +27,7 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>isoUploaderPlugin</finalName>
+    <finalName>iso-uploader-plugin</finalName>
   </build>
 
   <dependencies>

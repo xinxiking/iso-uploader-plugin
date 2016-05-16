@@ -38,7 +38,7 @@ mkdir -p %{buildroot}/usr/lib/systemd/system
 mkdir -p %{buildroot}/var/log/iso-uploader-plugin
 mkdir -p %{buildroot}/usr/sbin/
 cp -r UIPlugin/* %{buildroot}/usr/share/ovirt-engine/ui-plugins/
-cp Servlet/iso-uploader-plugin/target/isoUploaderPlugin.war %{buildroot}/usr/share/iso-uploader-plugin/deployments/
+cp Servlet/iso-uploader-plugin/target/iso-uploader-plugin.war %{buildroot}/usr/share/iso-uploader-plugin/deployments/
 cp iso-uploader-plugin.conf %{buildroot}/etc/httpd/conf.d/
 cp iso-uploader-plugin.service %{buildroot}/usr/lib/systemd/system
 cp iso-uploader-plugin.xml %{buildroot}/etc/iso-uploader-plugin/
