@@ -82,6 +82,9 @@
                 }
               }
 
+          },
+          SystemTreeSelectionChange: function(selectedNode) {
+              pluginApi.setTabAccessible('isouploader-tab', selectedNode.type == 'System');
           }
       };
    }]);
