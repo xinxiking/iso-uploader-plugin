@@ -1,0 +1,13 @@
+[Unit]
+Description=iso-uploader-plugin
+After=ovirt-engine.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/java -server -XX:+TieredCompilation -Xms256m -Xmx512m -XX:PermSize=256m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djava.awt.headless=true -Djava.util.logging.manager=org.jboss.logmanager -Dorg.jboss.resolver.warning=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djboss.modules.write-indexes=false -Djboss.server.default.config=iso-uploader-plugin -Djboss.home.dir=/usr/share/ovirt-engine-wildfly -Djboss.server.base.dir=/usr/share/iso-uploader-plugin -Djboss.server.log.dir=/var/log/iso-uploader-plugin -Djboss.server.config.dir=/etc/iso-uploader-plugin -jar /usr/share/ovirt-engine-wildfly/jboss-modules.jar -mp /usr/share/ovirt-engine-wildfly/modules:/var/lib/ovirt-engine/jboss_runtime/modules/01-modules-common -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone -c iso-uploader-plugin.xml
+Restart=on-abort
+SyslogIdentifier=iso-uploader-plugin
+
+
+[Install]
+WantedBy=multi-user.target
