@@ -34,7 +34,7 @@ function showIsoName() {
 
     function servletGetIsoName(){
         var str = $("#selectid option:selected").val();   //获得选中的值
-        alert(str);
+        alert("存储域已选定 请点击Upload按钮上传文件");
         $.ajax({
             type:"post",
             url:"/iso-uploader-plugin/GetIsoDomain",
