@@ -24,8 +24,9 @@ function showIsoName() {
                  }
               }
               //alert(isoName.join());
+              selectid.options[0] = new Option("请选择存储域",0);
               for(var i = 0;i < isoName.length;i++){
-                 selectid.options[i] = new Option(isoName[i],isoName[i]);
+                 selectid.options[i+1] = new Option(isoName[i],isoName[i]);
               }
             }
           });
@@ -34,7 +35,6 @@ function showIsoName() {
 
     function servletGetIsoName(){
         var str = $("#selectid option:selected").val();   //获得选中的值
-        alert("存储域已选定 请点击Upload按钮上传文件");
         $.ajax({
             type:"post",
             url:"/iso-uploader-plugin/GetIsoDomain",

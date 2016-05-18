@@ -8,10 +8,9 @@
 </head>
 <body>
 
-<select name="selectname" id="selectid" onFocus="showIsoName()">
+<select name="selectname" id="selectid" onFocus="showIsoName()" onchange="servletGetIsoName()">
 <option>下拉选择存储域</option>
 </select>
-<button onclick="servletGetIsoName()">确定</button>
 
   <div flow-init="{target: '/iso-uploader-plugin/upload',
            method: 'octet' }"
