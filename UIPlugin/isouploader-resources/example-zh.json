@@ -1,0 +1,15 @@
+{
+  "Upload": "上传",
+  "Actions": "操作",
+  "ETA": "剩余传输时间",
+  "Speed": "传输速度",
+  "Status": "上传状态",
+  "Done": "上传进度",
+  "Size": "文件大小",
+  "Name": "文件名称",
+  "PauseAll": "暂停所有上传",
+  "ResumeAll": "恢复所有上传",
+  "Domain": "下拉选择存储域",
+  "NFTD": "没有文件上传",
+  "Thanks": "感谢使用本插件，本插件所有代码都在https://github.com/eayun/iso-uploader-plugin。如有任何疑问或者建议，欢迎在https://github.com/eayun/iso-uploader-plugin/issues提出。"
+}

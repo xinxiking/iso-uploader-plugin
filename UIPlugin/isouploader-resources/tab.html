@@ -9,7 +9,7 @@
 <body>
 
 <select name="selectname" id="selectid" onFocus="showIsoName()" onchange="servletGetIsoName()">
-<option>下拉选择存储域</option>
+<option data-localize="Domain">Choice Domain</option>
 </select>
 
   <div flow-init="{target: '/iso-uploader-plugin/upload',
@@ -19,18 +19,18 @@
 
   <div id="menu" >
 
-    <span class="btn btn-primary" type="button" flow-btn>
+    <span class="btn btn-primary" type="button" data-localize="Upload" flow-btn>
       <span class="glyphicon glyphicon-plus"></span>
       Upload
     </span>
 
     <div ng-show="$flow.getSize()">
-    <a class="btn btn-default" ng-click="$flow.pause()" type="button" ng-show="$flow.isUploading()">
+    <a class="btn btn-default" ng-click="$flow.pause()" type="button" data-localize="PauseAll" ng-show="$flow.isUploading()">
       <span class="glyphicon glyphicon-pause"></span>
       Pause All
     </a>
 
-    <a class="btn btn-default" ng-click="$flow.resume()" type="button" ng-hide="$flow.isUploading()">
+    <a class="btn btn-default" ng-click="$flow.resume()" type="button" data-localize="ResumeAll" ng-hide="$flow.isUploading()">
       <span class="glyphicon glyphicon-repeat"></span>
       Resume All
     </a>
@@ -43,13 +43,13 @@
     <table class="table table-striped table-bordered table-hover" flow-transfers>
       <thead>
         <tr>
-           <th class="col-md-2">Name</th>
-           <th class="col-md-1">Size</th>
-           <th class="col-md-2">Done</th>
-           <th class="col-md-2">Status</th>
-           <th class="col-md-1">Speed</th>
-           <th class="col-md-1">ETA</th>
-           <th class="col-md-3">Actions</th>
+           <th class="col-md-2" data-localize="Name">Name</th>
+           <th class="col-md-1" data-localize="Size">Size</th>
+           <th class="col-md-2" data-localize="Done">Done</th>
+           <th class="col-md-2" data-localize="Status">Status</th>
+           <th class="col-md-1" data-localize="Speed">Speed</th>
+           <th class="col-md-1" data-localize="ETA">ETA</th>
+           <th class="col-md-3" data-localize="Actions">Actions</th>
         </tr>
       </thead>
 
@@ -143,7 +143,7 @@
     </tbody>
   </table>
 
-  <div ng-hide="$flow.getSize()" class="nothing-to-display">
+  <div ng-hide="$flow.getSize()" class="nothing-to-display" data-localize="NFTD">
     No files to display.
   </div>
 
@@ -153,7 +153,7 @@
 
 <footer class="footer">
   <div class="container">
-    <p class="text-muted">Thanks for using this plugin. All the code is on <a href="https://github.com/ovirt-china/iso-uploader-plugin">GitHub</a>. Any problem or suggestion please <a href="https://github.com/ovirt-china/iso-uploader-plugin/issues/new">open an issue on GitHub</a>.</p>
+    <p class="text-muted" data-localize="Thanks">Thanks for using this plugin. All the code is on <a href="https://github.com/ovirt-china/iso-uploader-plugin">GitHub</a>. Any problem or suggestion please <a href="https://github.com/ovirt-china/iso-uploader-plugin/issues/new">open an issue on GitHub</a>.</p>
   </div>
 </footer>
 
@@ -165,6 +165,15 @@
   <script src="js/getisoname.js"></script>
   <script src="js/filters.js"></script>
   <script src="lib/ng-flow-standalone.js"></script>
+  <script src="lib/jquery.localize.min.js"></script>
 
 </body>
+<script type="text/javascript" charset="utf-8">
+   var lang = top.location.href.split("=")[1].split("#")[0];
+   $(function(){
+      if (lang == 'zh_CN') {
+         $("[data-localize]").localize("example", { language: "zh" })
+      }
+   });
+</script>
 </html>
