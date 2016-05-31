@@ -5,6 +5,7 @@
 (function() {
 
   var app = angular.module('plugin.init', ['plugin.common']);
+  var lang = top.location.href.split("=")[1].split("#")[0];
 
   app.service('contentWindowService', function(){
     var contentWindow = null ;
@@ -51,7 +52,12 @@
    app.factory('tabManager', ['pluginApi', 'urlUtil', function (pluginApi, urlUtil) {
       return {
          addTab: function () {
-            pluginApi.addMainTab('ISO Uploader', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+            if(lang == 'zh_CN'){
+                pluginApi.addMainTab('ISO文件上传', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+            }
+            else{
+                pluginApi.addMainTab('ISO Uploader', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+            }
          }
       };
    }]);
