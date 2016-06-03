@@ -1,4 +1,17 @@
 function showIsoName() {
+          var api = parent.pluginApi('IsoUploader');
+          var userNameWithDomain = api.loginUserName();
+          if(userNameWithDomain != "admin@internal-authz"){
+              if(lang == 'zh_CN'){
+                  alert("您没有权限执行此功能！！！");
+              }
+              else{
+                  alert("You have no the permission of this function!");
+              }
+              var disableselect = document.getElementById("upload");
+              disableselect.disabled = "true";
+              return ;
+          }
           $.ajax({
             type: "GET",
             url: "/api/storagedomains/?search=status%3Dactive",
