@@ -31,6 +31,7 @@ mvn clean package war:war
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/ovirt-engine/ui-plugins/
+mkdir -p %{buildroot}/usr/share/ovirt-engine/setup/plugins/ovirt-engine-setup/iso-uploader-plugin/
 mkdir -p %{buildroot}/usr/share/iso-uploader-plugin/deployments/
 mkdir -p %{buildroot}/etc/httpd/conf.d/
 mkdir -p %{buildroot}/etc/iso-uploader-plugin
@@ -38,6 +39,7 @@ mkdir -p %{buildroot}/usr/lib/systemd/system
 mkdir -p %{buildroot}/var/log/iso-uploader-plugin
 mkdir -p %{buildroot}/usr/sbin/
 cp -r UIPlugin/* %{buildroot}/usr/share/ovirt-engine/ui-plugins/
+cp -r otopi/* %{buildroot}/usr/share/ovirt-engine/setup/plugins/ovirt-engine-setup/iso-uploader-plugin/
 cp Servlet/iso-uploader-plugin/target/iso-uploader-plugin.war %{buildroot}/usr/share/iso-uploader-plugin/deployments/
 cp iso-uploader-plugin.conf %{buildroot}/etc/httpd/conf.d/
 cp iso-uploader-plugin.service %{buildroot}/usr/lib/systemd/system
@@ -60,6 +62,7 @@ rm -rf %{buildroot}
 /etc/httpd/conf.d/
 /etc/iso-uploader-plugin/
 /usr/share/ovirt-engine/ui-plugins/
+/usr/share/ovirt-engine/setup/plugins/ovirt-engine-setup/iso-uploader-plugin/
 /usr/share/iso-uploader-plugin/
 /var/log/iso-uploader-plugin/
 
