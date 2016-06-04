@@ -5,6 +5,7 @@ import os
 from otopi import plugin, util
 
 from ovirt_engine_setup import constants as osetupcons
+from ovirt_engine_setup.engine import constants as oenginecons
 
 
 @util.export
@@ -18,5 +19,8 @@ class Plugin(plugin.PluginBase):
         ),
     )
     def enable_iso_uploader_plugin(self):
+        os.system("sed -i '/^#passwd/c\passwd=%s' /etc/ovirt-engine/isouploader.conf"
+            % self.environment[oenginecons.ConfigEnv.ADMIN_PASSWORD])
+        os.system("sed -i '/^#user/c\user=admin@internal' /etc/ovirt-engine/isouploader.conf")
         os.system("chkconfig iso-uploader-plugin on")
         self.dialog.note(text="ISO Uploader plugin enabled.")
