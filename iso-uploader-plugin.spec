@@ -14,6 +14,7 @@ BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:	bash
 Requires:	ovirt-engine >= 3.5.0
+Requires:	ovirt-iso-uploader
 
 %description
 Temp method for iso iamge upload from webadmin ui,
