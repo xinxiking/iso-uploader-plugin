@@ -19,10 +19,10 @@
 
   <div id="menu" >
 
-    <span class="btn btn-primary" type="button" data-localize="Upload" flow-btn>
+    <button class="btn btn-primary" id="upload" data-localize="Upload" flow-btn>
       <span class="glyphicon glyphicon-plus"></span>
       Upload
-    </span>
+    </button>
 
     <div ng-show="$flow.getSize()">
     <a class="btn btn-default" ng-click="$flow.pause()" type="button" data-localize="PauseAll" ng-show="$flow.isUploading()">
