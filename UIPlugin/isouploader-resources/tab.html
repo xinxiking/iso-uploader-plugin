@@ -85,7 +85,7 @@
 
           <td class="text-cell">
             <span class="label label-danger" ng-show="file.error">Error</span>
-            <span class="label label-warning" ng-show="file.paused">Paused</span>
+            <span class="label label-warning" ng-show="file.paused && !file.isComplete()">Paused</span>
             <span class="label label-primary" ng-show="file.isUploading()">Uploading</span>
             <span class="label label-success" ng-show="file.isComplete() && !file.error">Complete</span>
             <span class="label label-default" ng-hide="file.error || file.paused || file.isUploading() || file.isComplete()">Waiting</span>
