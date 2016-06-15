@@ -14,8 +14,10 @@ function showIsoName() {
           }
           $.ajax({
             type: "GET",
-            url: "/api/storagedomains/?search=status%3Dactive",
-            headers: {"Content-Type":"application/xml"},
+            url: "/ovirt-engine/api/storagedomains/?search=status%3Dactive",
+            headers: {"Content-Type":"application/xml",
+                      "Prefer":"persistent-auth",
+                     },
             success: function(data) {
               //var oSerializer = new XMLSerializer();
               //var getXMLString = oSerializer.serializeToString(data);
