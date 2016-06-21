@@ -29,7 +29,9 @@ public class UploadServlet extends HttpServlet {
         RandomAccessFile raf = new RandomAccessFile(info.flowFilePath, "rw");
 
         //Seek to position
-        raf.seek((flowChunkNumber - 1) * info.flowChunkSize);
+        long offset = ((long)(flowChunkNumber - 1)) * info.flowChunkSize;
+
+        raf.seek(offset);
 
         //Save to file
         InputStream is = request.getInputStream();
