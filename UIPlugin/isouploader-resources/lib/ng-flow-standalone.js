@@ -908,7 +908,7 @@
      */
     progress: function () {
       if (this.error) {
-        return 1;
+        return this._prevProgress;
       }
       if (this.chunks.length === 1) {
         this._prevProgress = Math.max(this._prevProgress, this.chunks[0].progress());
