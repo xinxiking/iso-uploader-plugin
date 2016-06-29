@@ -56,3 +56,15 @@ function showIsoName() {
         });
     }
 
+function removeTempFile(){
+    $.ajax({
+        type:"post",
+        url:"/iso-uploader-plugin/RemoveTempFile",
+        success:function(msg){
+            if(msg){
+                alert(msg);
+            }
+        }
+    });
+    alert("缓存文件夹已清空！！！");
+}
