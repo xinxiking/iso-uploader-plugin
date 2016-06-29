@@ -26,4 +26,14 @@
     <servlet-name>GetIsoDomain</servlet-name>
     <url-pattern>/GetIsoDomain</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveTempFile</display-name>
+    <servlet-name>RemoveTempFile</servlet-name>
+    <servlet-class>org.ovirtChina.enginePlugin.isoUploaderPlugin.RemoveTempFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveTempFile</servlet-name>
+    <url-pattern>/RemoveTempFile</url-pattern>
+  </servlet-mapping>
 </web-app>

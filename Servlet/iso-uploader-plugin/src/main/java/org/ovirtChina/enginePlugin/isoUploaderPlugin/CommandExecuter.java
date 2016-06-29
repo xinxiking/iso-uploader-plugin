@@ -30,7 +30,7 @@ public class CommandExecuter {
 
       System.out.println("Execute function ovirt-iso-uploader upload");
 
-      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName;
+      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName + ";rm -rf ./uploads/" + IsoUploadName;
 
       System.out.println(ovirtuploadername);
 
@@ -112,5 +112,19 @@ public class CommandExecuter {
 
 			System.out.println("End of the execution of the function ovirt-iso-uploader upload");
 	}
+
+        public void executeRemoveTempDir(String rmTempDirCommand) {
+
+            System.out.println("Executing command: " + rmTempDirCommand);
+
+                        String[] rmTempDir = new String[]{"/bin/sh","-c",rmTempDirCommand};
+                        try {
+                        ProcessBuilder builderRm = new ProcessBuilder(rmTempDir);
+                        builderRm.redirectErrorStream(true);
+                        Process pRm =builderRm.start();
+                        }catch (Exception e) {
+                                e.printStackTrace();
+                        }
+        }
 
 }
