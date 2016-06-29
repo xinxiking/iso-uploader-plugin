@@ -30,7 +30,7 @@ public class CommandExecuter {
 
       System.out.println("Execute function ovirt-iso-uploader upload");
 
-      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName;
+      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName + ";rm -rf ./uploads/" + IsoUploadName;
 
       System.out.println(ovirtuploadername);
 
