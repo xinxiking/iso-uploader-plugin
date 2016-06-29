@@ -113,4 +113,18 @@ public class CommandExecuter {
 			System.out.println("End of the execution of the function ovirt-iso-uploader upload");
 	}
 
+        public void executeRemoveTempDir(String rmTempDirCommand) {
+
+            System.out.println("Executing command: " + rmTempDirCommand);
+
+                        String[] rmTempDir = new String[]{"/bin/sh","-c",rmTempDirCommand};
+                        try {
+                        ProcessBuilder builderRm = new ProcessBuilder(rmTempDir);
+                        builderRm.redirectErrorStream(true);
+                        Process pRm =builderRm.start();
+                        }catch (Exception e) {
+                                e.printStackTrace();
+                        }
+        }
+
 }
