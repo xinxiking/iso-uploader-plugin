@@ -473,6 +473,16 @@
      */
     upload: function () {
       // Make sure we don't start too many uploads at once
+      var str = $("#selectid option:selected").val();   //获得选中的值
+      if(str=="请选择存储域"||str=="Choice Domain"){
+          if(lang != 'zh_CN'){
+              alert("You have not choice domain,please choice domain before upload!");
+          }
+          else{
+              alert("您尚未选择存储域，请先选择存储域再进行文件上传！");
+          }
+          return ;
+      }
       var ret = this._shouldUploadNext();
       if (ret === false) {
         return;

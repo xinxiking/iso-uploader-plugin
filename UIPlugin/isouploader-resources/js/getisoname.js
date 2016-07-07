@@ -27,10 +27,10 @@ function showIsoName() {
               }
               //alert(isoName.join());
               if(lang == 'zh_CN'){
-                  selectid.options[0] = new Option("请选择存储域",2);
+                  selectid.options[0] = new Option("请选择存储域","请选择存储域");
               }
               else{
-                  selectid.options[0] = new Option("Choice Domain",2);
+                  selectid.options[0] = new Option("Choice Domain","Choice Domain");
               }
               for(var i = 0;i < isoName.length;i++){
                  selectid.options[i+1] = new Option(isoName[i],isoName[i]);
