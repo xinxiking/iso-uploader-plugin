@@ -575,6 +575,13 @@
             files.push(f);
           }
         }
+        else{
+          if(lang != 'zh_CN'){
+            alert("File had already in the list,if you want continue,please remove file from the list frist!");
+          }else{
+            alert("文件已在列表中，若继续，请先在列表中移除文件！");
+          }
+        }
       }, this);
       if (this.fire('filesAdded', files, event)) {
         each(files, function (file) {
