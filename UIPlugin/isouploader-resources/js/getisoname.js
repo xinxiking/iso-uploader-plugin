@@ -1,3 +1,7 @@
+var isoAvailable = new Array();
+var isoName = new Array();
+var availableIso = null;
+
 function showIsoName() {
           $.ajax({
             type: "GET",
@@ -10,19 +14,30 @@ function showIsoName() {
               //var getXMLString = oSerializer.serializeToString(data);
               //alert(getXMLString);
               var j = 0;
-              var isoName = new Array();
+              var k = 0;
               var isoNameXML = data.getElementsByTagName("name");
               var isoTypeXML=data.getElementsByTagName("type");
+              var isoAvailableXML=data.getElementsByTagName("available");
               var getIsoName=new Array(isoNameXML.length);
               var getIsoType=new Array(isoTypeXML.length);
+              var getIsoAvailable=new Array(isoAvailableXML.length);
               for(var i=0;i<isoNameXML.length;i++){
                  getIsoName[i]=isoNameXML[i].childNodes[0].data;
+              }
+              for(var i=0;i<isoAvailableXML.length;i++){
+                 getIsoAvailable[i]=isoAvailableXML[i].childNodes[0].data;
               }
               //alert(getIsoName.join());
               for(var i=0;i<isoTypeXML.length;i=i+2){
                  if(isoTypeXML[i].childNodes[0].data=="iso"){
                      isoName[j] = getIsoName[i/2];
                      j++;
+                 }
+              }
+              for(var i=0;i<isoTypeXML.length;i=i+2){
+                 if(isoTypeXML[i].childNodes[0].data=="iso"){
+                     isoAvailable[k] = getIsoAvailable[i/2];
+                     k++;
                  }
               }
               //alert(isoName.join());
@@ -40,8 +55,13 @@ function showIsoName() {
 }
 
 
-    function servletGetIsoName(){
+function servletGetIsoName(){
         var str = $("#selectid option:selected").val();   //获得选中的值
+        for(var i=0;i<isoName.length;i++){
+            if(isoName[i]==str){
+                availableIso = isoAvailable[i];
+            }
+        }
         $.ajax({
             type:"post",
             url:"/iso-uploader-plugin/GetIsoDomain",
@@ -54,7 +74,7 @@ function showIsoName() {
                 }
             }
         });
-    }
+}
 
 function removeTempFile(){
     $.ajax({
