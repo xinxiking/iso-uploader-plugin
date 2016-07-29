@@ -76,15 +76,44 @@ function servletGetIsoName(){
         });
 }
 
-function removeTempFile(){
-    $.ajax({
-        type:"post",
-        url:"/iso-uploader-plugin/RemoveTempFile",
-        success:function(msg){
-            if(msg){
-                alert(msg);
-            }
-        }
-    });
-    alert("缓存文件夹已清空！！！");
-}
+         function removeTempFile(){
+             var api = parent.pluginApi('VBSPlugin');
+             $.ajax({
+             type:"post",
+             url:"/iso-uploader-plugin/RemoveTempFile",
+             success:function(msg){
+               if(msg){
+                  alert(msg);
+                }
+              }
+             });
+              var language = top.location.href.split("=")[1].split("#")[0];
+              if(language == 'en_US'){
+              api.showDialog('success','save-save','plugin/IsoUploader/saveUS.html','340px','300px',{
+                buttons: [
+                  {
+                     label: 'sure',
+                     onClick: function() {
+                     api.closeDialog('save-save');
+                     }
+                  }
+                 ],
+               resizeEnabled: true,
+               closeIconVisible: false,
+               closeOnEscKey: false
+              });}else{
+             api.showDialog('成功','save-save','plugin/IsoUploader/saveCN.html','340px','300px',{
+               buttons: [
+                 {
+                    label: '确定',
+                    onClick: function() {
+                    api.closeDialog('save-save');
+                    }
+                 }
+               ],
+            resizeEnabled: true,
+            closeIconVisible: false,
+            closeOnEscKey: false
+             });
+                }
+         }
