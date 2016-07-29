@@ -568,6 +568,14 @@
       each(fileList, function (file) {
         // Directories have size `0` and name `.`
         // Ignore already added files
+        if(file.size > availableIso){
+            if(lang != 'zh_CN'){
+                alert('The storage space not enough!');
+            }else{
+                alert('存储空间不足！');
+            }
+            return ;
+        }
         if (!(file.size % 4096 === 0 && (file.name === '.' || file.fileName === '.')) &&
           !this.getFromUniqueIdentifier(this.generateUniqueIdentifier(file))) {
           var f = new FlowFile(this, file);
