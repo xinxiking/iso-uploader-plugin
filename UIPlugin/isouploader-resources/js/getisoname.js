@@ -5,7 +5,7 @@ var availableIso = null;
 function showIsoName() {
           $.ajax({
             type: "GET",
-            url: "/ovirt-engine/api/storagedomains/?search=status%3Dactive",
+            url: "/eayunos/api/storagedomains/?search=status%3Dactive",
             headers: {"Content-Type":"application/xml",
                       "Prefer":"persistent-auth",
                      },
