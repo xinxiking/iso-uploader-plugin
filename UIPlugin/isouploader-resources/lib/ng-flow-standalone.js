@@ -367,7 +367,7 @@
             position: 'absolute'
           });
           // for opera 12 browser, input must be assigned to a document
-          domNode.appendChild(input);
+          domNode.parentNode.appendChild(input);
           // https://developer.mozilla.org/en/using_files_from_web_applications)
           // event listener is executed two times
           // first one - original mouse click event
