@@ -1648,6 +1648,23 @@ angular.module('flow.init', ['flow.provider'])
         $parse($attrs.flowName).assign($scope);
       });
     }
+    
+    var _lang = 'zh_CN';
+    try{
+       _lang = top.location.href.split("=")[1].split("#")[0];
+    }catch(e){}
+    $scope.i18nInfo = null;
+    jQuery.i18n.properties({
+	name:"UploaderMessages",
+	language:_lang,
+	async:true,
+	mode:"map",
+        encoding: 'UTF-8', 
+	callback:function(){
+            $scope.i18nInfo = $.i18n.map;
+	}
+     });
+    	
   }])
   .directive('flowInit', [function() {
     return {
