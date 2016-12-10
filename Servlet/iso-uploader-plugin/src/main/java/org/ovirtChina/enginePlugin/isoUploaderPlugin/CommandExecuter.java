@@ -27,16 +27,18 @@ public class CommandExecuter {
       System.out.println("End of the execution of the function ovirt-iso-uploader list");
 
       String isoname = useIsoName;
+      
+      String isoFileName = IsoUploadName.replace(" ","\\ ");
 
       System.out.println("Execute function ovirt-iso-uploader upload");
 
-      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName + ";rm -rf ./uploads/" + IsoUploadName;
+      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + isoFileName + ";rm -rf ./uploads/" + isoFileName;
 
       System.out.println(ovirtuploadername);
 
       executeCommandisoupload(ovirtuploadername);
 
-      System.out.println(IsoUploadName + " is completed.");
+      System.out.println(isoFileName + " is completed.");
 
   }
 
