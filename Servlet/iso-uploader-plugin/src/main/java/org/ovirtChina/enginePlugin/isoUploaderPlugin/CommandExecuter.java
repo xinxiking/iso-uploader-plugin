@@ -27,18 +27,16 @@ public class CommandExecuter {
       System.out.println("End of the execution of the function ovirt-iso-uploader list");
 
       String isoname = useIsoName;
-      
-      String isoFileName = IsoUploadName.replace(" ","\\ ");
 
       System.out.println("Execute function ovirt-iso-uploader upload");
 
-      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + isoFileName + ";rm -rf ./uploads/" + isoFileName;
+      String ovirtuploadername = "ovirt-iso-uploader --iso-domain=" + isoname + " upload ./uploads/" + IsoUploadName + ";rm -rf ./uploads/" + IsoUploadName;
 
       System.out.println(ovirtuploadername);
 
       executeCommandisoupload(ovirtuploadername);
 
-      System.out.println(isoFileName + " is completed.");
+      System.out.println(IsoUploadName + " is completed.");
 
   }
 
@@ -54,7 +52,7 @@ public class CommandExecuter {
   */
 	private String executeCommand(String command) {
 
-    System.out.println("Executing command: " + command);
+                System.out.println("Executing command: " + command);
 
 		String[] commands = new String[]{"/bin/sh","-c",command};
 
@@ -71,7 +69,7 @@ public class CommandExecuter {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-		  String line = "";
+			String line = "";
 
 			line = reader.readLine();
 			System.out.println(line);
@@ -90,24 +88,24 @@ public class CommandExecuter {
 			e.printStackTrace();
 		}
 
-    System.out.println("Output: " + outputBuf.toString().trim());
+                System.out.println("Output: " + outputBuf.toString().trim());
 		return outputBuf.toString().trim();
 	}
 
 	private void executeCommandisoupload(String command1) {
 
-	    System.out.println("Executing command: " + command1);
+	                System.out.println("Executing command: " + command1);
 
 			String[] commands1 = new String[]{"/bin/sh","-c",command1};
 			try {
-			ProcessBuilder builder1 = new ProcessBuilder(commands1);
-			builder1.redirectErrorStream(true);
-			Process p1 =builder1.start();
-			//BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(p1.getOutputStream()));
-			BufferedReader reader1 = new BufferedReader(new InputStreamReader(p1.getInputStream()));
-			String line1 = "";
-			line1 = reader1.readLine();
-			System.out.println(line1);
+				ProcessBuilder builder1 = new ProcessBuilder(commands1);
+				builder1.redirectErrorStream(true);
+				Process p1 =builder1.start();
+				//BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(p1.getOutputStream()));
+				BufferedReader reader1 = new BufferedReader(new InputStreamReader(p1.getInputStream()));
+				String line1 = "";
+				line1 = reader1.readLine();
+			    System.out.println(line1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -115,18 +113,29 @@ public class CommandExecuter {
 			System.out.println("End of the execution of the function ovirt-iso-uploader upload");
 	}
 
-        public void executeRemoveTempDir(String rmTempDirCommand) {
-
+    public void executeRemoveTempDir(String rmTempDirCommand) {
             System.out.println("Executing command: " + rmTempDirCommand);
+            String[] rmTempDir = new String[]{"/bin/sh","-c",rmTempDirCommand};
+            try {
+	            ProcessBuilder builderRm = new ProcessBuilder(rmTempDir);
+	            builderRm.redirectErrorStream(true);
+	            Process pRm =builderRm.start();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+    
+    public void executeRemoveDir(String rmCommand) {
+		    System.out.println("Executing command: " + rmCommand);
 
-                        String[] rmTempDir = new String[]{"/bin/sh","-c",rmTempDirCommand};
-                        try {
-                        ProcessBuilder builderRm = new ProcessBuilder(rmTempDir);
-                        builderRm.redirectErrorStream(true);
-                        Process pRm =builderRm.start();
-                        }catch (Exception e) {
-                                e.printStackTrace();
-                        }
-        }
+            String[] rmCommands = new String[]{rmCommand};
+            try {
+                ProcessBuilder builderRm = new ProcessBuilder(rmCommands);
+                builderRm.redirectErrorStream(true);
+                Process pRm =builderRm.start();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
 
 }
