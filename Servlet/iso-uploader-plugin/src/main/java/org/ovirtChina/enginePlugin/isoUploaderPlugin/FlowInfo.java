@@ -16,8 +16,54 @@ public class FlowInfo {
     public String   flowIdentifier;
     public String   flowFilename;
     public String   flowRelativePath;
+    public String   domainName;
+    
+	public int getFlowChunkSize() {
+		return flowChunkSize;
+	}
+	public void setFlowChunkSize(int flowChunkSize) {
+		this.flowChunkSize = flowChunkSize;
+	}
+	public long getFlowTotalSize() {
+		return flowTotalSize;
+	}
+	public void setFlowTotalSize(long flowTotalSize) {
+		this.flowTotalSize = flowTotalSize;
+	}
+	public String getFlowIdentifier() {
+		return flowIdentifier;
+	}
+	public void setFlowIdentifier(String flowIdentifier) {
+		this.flowIdentifier = flowIdentifier;
+	}
+	public String getFlowFilename() {
+		return flowFilename;
+	}
+	public void setFlowFilename(String flowFilename) {
+		this.flowFilename = flowFilename;
+	}
+	public String getFlowRelativePath() {
+		return flowRelativePath;
+	}
+	public void setFlowRelativePath(String flowRelativePath) {
+		this.flowRelativePath = flowRelativePath;
+	}
 
-    public static class FlowChunkNumber {
+	public String getFlowFilePath() {
+		return flowFilePath;
+	}
+	public void setFlowFilePath(String flowFilePath) {
+		this.flowFilePath = flowFilePath;
+	}
+	
+	public String getDomainName() {
+		return domainName;
+	}
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public static class FlowChunkNumber {
         public FlowChunkNumber(int number) {
             this.number = number;
         }

@@ -7,23 +7,23 @@
   <script src="lib/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-
+<!--
 <select name="selectname" id="selectid" onFocus="showIsoName()" onchange="servletGetIsoName()">
 <option data-localize="Domain">Choice Domain</option>
 </select>
-
+-->
   <div flow-init="{target: '/iso-uploader-plugin/upload',
            method: 'octet' }"
  flow-files-submitted="$flow.upload()"
  flow-file-success="$file.msg = $message">
 
   <div id="menu" >
-    <div id="uploadBtn">
+
     <button class="btn btn-primary" id="upload" data-localize="Upload" flow-btn>
       <span class="glyphicon glyphicon-plus"></span>
       Upload
     </button>
-    </div>
+
     <div ng-show="$flow.getSize()">
     <a class="btn btn-default" ng-click="$flow.pause()" type="button" data-localize="PauseAll" ng-show="$flow.isUploading()">
       <span class="glyphicon glyphicon-pause"></span>
@@ -48,8 +48,8 @@
            <th class="col-md-2" data-localize="Name">Name</th>
            <th class="col-md-1" data-localize="Size">Size</th>
            <th class="col-md-2" data-localize="Done">Done</th>
-           <th class="col-md-2" data-localize="Status">Status</th>
-           <th class="col-md-1" data-localize="Speed">Speed</th>
+           <th class="col-md-1" data-localize="Status">Status</th>
+           <th class="col-md-2" data-localize="Speed">Speed</th>
            <th class="col-md-1" data-localize="ETA">ETA</th>
            <th class="col-md-3" data-localize="Actions">Actions</th>
         </tr>
@@ -158,7 +158,7 @@
   </div>
 </footer>
 
-  <script src="lib/jquery.i18n.properties.js"></script>
+  <script src="lib/jquery.i18n.properties.min.js"></script>
   <script src="lib/bootstrap.min.js"></script>
   <script src="lib/angular/js/angular.js"></script>
   <script src="js/common.js"></script>

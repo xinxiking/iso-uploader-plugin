@@ -6,7 +6,8 @@
 
   var app = angular.module('plugin.init', ['plugin.common']);
   var lang = top.location.href.split("=")[1].split("#")[0];
-
+  var availableIso = null;
+  
   app.service('contentWindowService', function(){
     var contentWindow = null ;
     var tabWindow = null;
@@ -53,17 +54,34 @@
       return {
          addTab: function () {
             if(lang == 'zh_CN'){
-                pluginApi.addMainTab('ISO文件上传', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+                //pluginApi.addMainTab('ISO文件上传', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+                pluginApi.addSubTab('Storage', 'ISO文件上传', 'storage-iso-upload-tab',urlUtil.relativeUrl('tab.html'));
+                //pluginApi.addSubTab('Storage', '镜像', 'storage-iso-list-tab',urlUtil.relativeUrl('list.html'));
             }
             else{
-                pluginApi.addMainTab('ISO Uploader', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+                //pluginApi.addMainTab('ISO Uploader', 'isouploader-tab', urlUtil.relativeUrl('tab.html'));
+                pluginApi.addSubTab('Storage', 'ISO Uploader', 'storage-iso-upload-tab',urlUtil.relativeUrl('tab.html'));
+                //pluginApi.addSubTab('Storage', 'ISO', 'storage-iso-list-tab',urlUtil.relativeUrl('list.html'));
             }
+            pluginApi.setTabAccessible('storage-iso-upload-tab', false);
+            //pluginApi.setTabAccessible('storage-iso-list-tab', false);
+						pluginApi.addSubTabActionButton('Storage', 'Event', 'Custom Button', {
+						    onClick: function() {
+						        var selectedHostEvent = arguments[0];
+						       // alert(selectedHostEvent.message);
+						        var isSpecial = selectedHostEvent.message.indexOf('special') != -1;
+						        api.setTabAccessible('custom-tab', isSpecial);
+						    },
+						    isEnabled: function() {
+						        return arguments.length == 1;
+						    }
+	          });
          }
       };
    }]);
 
    // Define event handler functions for later invocation by UI plugin infrastructure
-   app.factory('pluginEventHandlers', ['pluginName', 'pluginApi', 'tabManager', 'contentWindowService', function (pluginName, pluginApi, tabManager, contentWindow) {
+   app.factory('pluginEventHandlers', ['pluginName', 'pluginApi', 'tabManager', 'contentWindowService', '$http',function (pluginName, pluginApi, tabManager, contentWindow,$http) {
       return {
          UiInit: function () {
             tabManager.addTab();
@@ -90,7 +108,33 @@
 
           },
           SystemTreeSelectionChange: function(selectedNode) {
-              pluginApi.setTabAccessible('isouploader-tab', selectedNode.type == 'System');
+          	  //console.dir(selectedNode);
+          	  //
+              if(selectedNode.type == 'Storage'){
+//                $http({
+//                         url:'iso-uploader-plugin/GetIsoDomain',
+//                         method:'post',
+//                         data:{'selectname':selectedNode.entity.name},
+//                }).success(function(data,header,config,status){
+//                }).error(function(data,header,config,status){
+//                });
+            	  sessionStorage.setItem("domain_name", selectedNode.entity.name);
+		          $http({
+		                 url:'/eayunos/api/storagedomains/'+selectedNode.entity.id,
+		                 method:'GET',
+		                 headers: {"Content-Type":"application/xml","Prefer":"persistent-auth"}
+		          }).success(function(data,header,config,status){
+		                 //console.log(data);
+		                 pluginApi.setTabContentUrl('storage-iso-upload-tab','plugin/IsoUploader/tab.html#'+data.available);
+		                 //pluginApi.setTabContentUrl('storage-iso-list-tab','plugin/IsoUploader/list.html#'+selectedNode.entity.id);
+		                 pluginApi.setTabAccessible('storage-iso-upload-tab', data.type == 'iso');
+		                 //pluginApi.setTabAccessible('storage-iso-list-tab', data.type == 'iso');
+		          }).error(function(data,header,config,status){
+		                 pluginApi.setTabAccessible('storage-iso-upload-tab', false);
+		                 //pluginApi.setTabAccessible('storage-iso-list-tab', false);
+		          });
+              }
+              //pluginApi.setTabAccessible('isouploader-tab', selectedNode.type == 'System');
           }
       };
    }]);
