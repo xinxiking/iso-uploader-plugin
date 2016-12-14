@@ -1,7 +1,11 @@
 package org.ovirtChina.enginePlugin.isoUploaderPlugin;
 
-import java.io.*;
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 
 /**
  * by fanxu
@@ -35,7 +39,7 @@ public class FlowInfoStorage {
      */
     public synchronized FlowInfo get(int flowChunkSize, long flowTotalSize,
                              String flowIdentifier, String flowFilename,
-                             String flowRelativePath, String flowFilePath) {
+                             String flowRelativePath, String flowFilePath,String domainName) {
 
         FlowInfo info = mMap.get(flowIdentifier);
 
@@ -48,17 +52,19 @@ public class FlowInfoStorage {
             info.flowFilename      = flowFilename;
             info.flowRelativePath  = flowRelativePath;
             info.flowFilePath      = flowFilePath;
-
+            info.domainName        = domainName;
             mMap.put(flowIdentifier, info);
         }
         return info;
     }
 
     /**
-     * É¾ï¿½ï¿½FlowInfo
+     * É¾³ýFlowInfo
      * @param info
      */
     public void remove(FlowInfo info) {
        mMap.remove(info.flowIdentifier);
     }
+   
+    
 }

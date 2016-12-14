@@ -59,8 +59,8 @@ public class UploadServlet extends HttpServlet {
             FlowInfoStorage.getInstance().remove(info);
             response.getWriter().print("All finished.");
 
-            getOptionIsoName = GetIso();
-            list(info.flowFilename,getOptionIsoName);
+            //getOptionIsoName = GetIso();
+            list(info.flowFilename,info.domainName);
 
             //System.out.println(info.flowFilename + " is completed.");
 
@@ -93,7 +93,7 @@ public class UploadServlet extends HttpServlet {
         String flowIdentifier      = request.getParameter("flowIdentifier");
         String flowFilename        = request.getParameter("flowFilename");
         String flowRelativePath    = request.getParameter("flowRelativePath");
-
+        String domainName          = request.getParameter("domainName");
         //DEBUG
         // System.out.println(
         // "base_dir = " + base_dir + "\n"
@@ -117,7 +117,7 @@ public class UploadServlet extends HttpServlet {
         FlowInfoStorage storage = FlowInfoStorage.getInstance();
 
         FlowInfo info = storage.get(flowChunkSize, flowTotalSize,
-                flowIdentifier, flowFilename, flowRelativePath, flowFilePath);
+                flowIdentifier, flowFilename, flowRelativePath, flowFilePath,domainName);
         if (!info.vaild())         {
             storage.remove(info);
             throw new ServletException("Invalid request params.");

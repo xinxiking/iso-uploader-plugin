@@ -367,7 +367,7 @@
             position: 'absolute'
           });
           // for opera 12 browser, input must be assigned to a document
-          domNode.parentNode.appendChild(input);
+          domNode.appendChild(input);
           // https://developer.mozilla.org/en/using_files_from_web_applications)
           // event listener is executed two times
           // first one - original mouse click event
@@ -558,6 +558,7 @@
       each(fileList, function (file) {
         // Directories have size `0` and name `.`
         // Ignore already added files
+        /*
         var str = $("#selectid option:selected").val();   //获得选中的值
         if(str=="请选择存储域"||str=="Choice Domain"){
             if(lang != 'zh_CN'){
@@ -568,6 +569,9 @@
             }
             return ;
         }
+        */
+
+        var availableIso = location.href.split("#")[1];
         if(file.size > availableIso){
             if(lang != 'zh_CN'){
                 alert('The storage space not enough!');
@@ -576,6 +580,7 @@
             }
             return ;
         }
+        
         if (!(file.size % 4096 === 0 && (file.name === '.' || file.fileName === '.')) &&
           !this.getFromUniqueIdentifier(this.generateUniqueIdentifier(file))) {
           var f = new FlowFile(this, file);
@@ -596,6 +601,7 @@
           if (this.opts.singleFile && this.files.length > 0) {
             this.removeFile(this.files[0]);
           }
+          file.domainName = sessionStorage.getItem("domain_name");
           this.files.push(file);
         }, this);
       }
@@ -1397,7 +1403,7 @@
       // Add data from the query options
       var query = evalOpts(this.flowObj.opts.query, this.fileObj, this, isTest);
       query = extend(this.getParams(), query);
-
+      query.domainName=this.fileObj.domainName;
       var target = evalOpts(this.flowObj.opts.target, this.fileObj, this, isTest);
       var data = null;
       if (method === 'GET' || paramsMethod === 'octet') {
@@ -1621,9 +1627,9 @@ angular.module('flow.provider', [])
 angular.module('flow.init', ['flow.provider'])
   .controller('flowCtrl', ['$scope', '$attrs', '$parse', 'flowFactory',
   function ($scope, $attrs, $parse, flowFactory) {
-
+	  //console.log(location.href.split("#")[1]);
     var options = angular.extend({}, $scope.$eval($attrs.flowInit));
-
+    
     // use existing flow object or create a new one
     var flow  = $scope.$eval($attrs.flowObject) || flowFactory.create(options);
 
